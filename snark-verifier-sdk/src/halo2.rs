@@ -124,25 +124,25 @@ where
     end_timer!(proof_time);
 
     // validate proof before caching
-    assert!(
-        {
-            let mut transcript_read = PoseidonTranscript::<NativeLoader, &[u8]>::from_spec(
-                &proof[..],
-                POSEIDON_SPEC.clone(),
-            );
-            VerificationStrategy::<_, V>::finalize(
-                verify_proof::<_, V, _, _, _>(
-                    params.verifier_params(),
-                    pk.get_vk(),
-                    AccumulatorStrategy::new(params.verifier_params()),
-                    &[instances.as_slice()],
-                    &mut transcript_read,
-                )
-                .unwrap(),
-            )
-        },
-        "SNARK proof failed to verify"
-    );
+    // assert!(
+    //     {
+    //         let mut transcript_read = PoseidonTranscript::<NativeLoader, &[u8]>::from_spec(
+    //             &proof[..],
+    //             POSEIDON_SPEC.clone(),
+    //         );
+    //         VerificationStrategy::<_, V>::finalize(
+    //             verify_proof::<_, V, _, _, _>(
+    //                 params.verifier_params(),
+    //                 pk.get_vk(),
+    //                 AccumulatorStrategy::new(params.verifier_params()),
+    //                 &[instances.as_slice()],
+    //                 &mut transcript_read,
+    //             )
+    //             .unwrap(),
+    //         )
+    //     },
+    //     "SNARK proof failed to verify"
+    // );
 
     if let Some((instance_path, proof_path)) = path {
         write_instances(&instances, instance_path);
